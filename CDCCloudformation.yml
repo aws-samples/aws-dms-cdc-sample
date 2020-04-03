@@ -118,11 +118,15 @@ Resources:
                 Action:
                   - 's3:GetObject'
                   - 's3:PutObject'
-                Resource:
-                  - 'arn:aws:s3:::*'
+                Resource: !Join 
+                  - ''
+                  - - 'arn:aws:s3:::'
+                    - !Ref TargetS3BucketName
               - Effect: Allow
                 Action: 'kinesis:*'
-                Resource: '*'
+                Resource: !GetAtt 
+                  - testkinesisstream
+                  - Arn
   testkinesisstream:
     Type: 'AWS::Kinesis::Stream'
     Properties:
