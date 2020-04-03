@@ -201,7 +201,10 @@ Resources:
             Statement:
               - Effect: Allow
                 Action: 's3:*'
-                Resource: '*'
+                Resource: !Join 
+                  - ''
+                  - - 'arn:aws:s3:::'
+                    - !Ref TargetS3BucketName
   DMSEndpoint:
     Type: 'AWS::DMS::Endpoint'
     Properties:
